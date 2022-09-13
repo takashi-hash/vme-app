@@ -9,22 +9,25 @@ import { LockIcon } from "@chakra-ui/icons";
 import { useRef } from "react";
 
 const Login = () => {
-  const inputMail = useRef(null);
-  const inputPass = useRef(null);
+  const tourokuMail = useRef(null);
+  const tourokuPass = useRef(null);
+  const loginMail = useRef(null);
+  const loginuPass = useRef(null);
+  
 
   const portfolioLogin = () => {
-    if (inputMail.current.value === "" || inputPass.current.value === "") {
+    if (loginMail.current.value === "" || loginuPass.current.value === "") {
       alert("メールアドレスとパスワードの両方が必須です。");
       return;
     }
-    signInEmailAndPassword(inputMail.current.value, inputPass.current.value);
+    signInEmailAndPassword(loginMail.current.value, loginuPass.current.value);
   };
   const portfolioCreateUser = () => {
-    if (inputMail.current.value === "" || inputPass.current.value === "") {
+    if (tourokuMail.current.value === "" || tourokuPass.current.value === "") {
       alert("メールアドレスとパスワードの両方が必須です。");
       return;
     }
-    createUser(inputMail.current.value, inputPass.current.value);
+    createUser(tourokuMail.current.value, tourokuPass.current.value);
   };
 
   return (
@@ -78,8 +81,8 @@ const Login = () => {
         <Heading color="teal.500" as="h1" size="lg" textAlign="center" mb="1rem">
           portfolio会員登録
         </Heading>
-        <Input ref={inputMail} type="email" placeholder="email" w="80%" mb="1rem" />
-        <Input ref={inputPass} type="password" placeholder="password" w="80%" mb="1rem" />
+        <Input ref={tourokuMail} type="email" placeholder="email" w="80%" mb="1rem" />
+        <Input ref={tourokuPass} type="password" placeholder="password" w="80%" mb="1rem" />
         <Button
           my={4}
           py={6}
@@ -95,8 +98,8 @@ const Login = () => {
         <Heading color="teal.500" as="h1" size="lg" textAlign="center"mb="1rem">
           portfolio認証
         </Heading>
-        <Input ref={inputMail} type="email" placeholder="email" w="80%" mb="1rem" />
-        <Input ref={inputPass} type="password" placeholder="password" w="80%" mb="1rem" />
+        <Input ref={loginMail} type="email" placeholder="email" w="80%" mb="1rem" />
+        <Input ref={loginuPass} type="password" placeholder="password" w="80%" mb="1rem" />
         <Button
           my={4}
           py={6}
