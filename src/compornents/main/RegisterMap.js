@@ -12,9 +12,10 @@ export default function RegisterMap(props) {
   const toast = useToast();
   const { mapData } = useContext(mapDataContext);
   const { currentUser } = useContext(AuthContext);
+  
   const registerUser = currentUser.reloadUserInfo.displayName;
   const onClose = props.closeFlunction;
-
+  
   const changeName = (e) => {
     // stateに名前を登録
     if (e !== undefined) {

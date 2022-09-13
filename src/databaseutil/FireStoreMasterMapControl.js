@@ -46,26 +46,48 @@ export function UpdateMasterMapIconData(collectionName, addDatas) {
 // fireStore のマップデータを追加する
 export function UpdateMasterHistory(registerUser) {
   const batch = writeBatch(db);
-  batch.set(doc(collection(db, "MasterUpdateHistory"), "data"), {
-    mapName: "マスタデータ",
-    timestamp: serverTimestamp(),
-    registerUser: registerUser,
-  });
+  if (registerUser !== undefined) {
+    batch.set(doc(collection(db, "MasterUpdateHistory"), "data"), {
+      mapName: "マスタデータ",
+      timestamp: serverTimestamp(),
+      registerUser: registerUser,
+    });
+  } else {
+    batch.set(doc(collection(db, "MasterUpdateHistory"), "data"), {
+      mapName: "マスタデータ",
+      timestamp: serverTimestamp(),
+      registerUser: "ゲストユーザ",
+    });
+  }
   batch.commit();
 }
 
 // 編集したマップデータを追加する
-export function RegisterMapIconData(collectionName, addDatas, mapName, currentUser) {
+export function RegisterMapIconData(
+  collectionName,
+  addDatas,
+  mapName,
+  currentUser
+) {
   //バッチ処理の準備
   const batch = writeBatch(db);
   //CSVデータの登録
   const masterMapDocRef = doc(collection(db, collectionName));
 
-  batch.set(masterMapDocRef, {
-    mapName: mapName,
-    timestamp: serverTimestamp(),
-    registerUser: currentUser,
-  });
+  if (currentUser !== undefined) {
+    batch.set(masterMapDocRef, {
+      mapName: mapName,
+      timestamp: serverTimestamp(),
+      registerUser: currentUser,
+    });
+  } else {
+    batch.set(masterMapDocRef, {
+      mapName: mapName,
+      timestamp: serverTimestamp(),
+      registerUser: "ゲストユーザ",
+    });
+  }
+
   Object.keys(addDatas).forEach((csvKeyName) => {
     //オブジェクト型{キー名:値}で１レコードずつ登録
     batch.set(

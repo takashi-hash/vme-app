@@ -3,7 +3,9 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
   signOut,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -29,6 +31,20 @@ export const storage = getStorage();
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
+    .then((result) => {})
+    .catch((error) => {
+      alert("認証エラー");
+    });
+};
+export const signInEmailAndPassword = (email, password) => {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((result) => {})
+    .catch((error) => {
+      alert("認証エラー");
+    });
+};
+export const createUser = (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password)
     .then((result) => {})
     .catch((error) => {
       alert("認証エラー");
